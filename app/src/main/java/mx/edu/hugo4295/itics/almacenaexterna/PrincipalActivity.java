@@ -1,5 +1,6 @@
 package mx.edu.hugo4295.itics.almacenaexterna;
 
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 import static android.os.Environment.getExternalStorageDirectory;
 
@@ -43,6 +46,18 @@ public class PrincipalActivity extends AppCompatActivity {
                 nuevaCarpeta.mkdirs();
                 ruta.setText(nuevaCarpeta.getPath().toString());
                 Toast.makeText(this, nuevaCarpeta.getPath(), Toast.LENGTH_SHORT).show();
+
+                try {
+                    //se crea archivo
+                    File f = new File(nuevaCarpeta.getAbsolutePath(), "hugo4295_sd.txt");
+                    OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f));
+
+                    fout.write("Texto de prueba.");
+                    fout.close();
+                }catch (Exception ex)
+                {
+                    Toast.makeText(this, "Error al escribir fichero a tarjeta SD", Toast.LENGTH_SHORT).show();
+                }
             }
         } else if (estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
             sdDisponible = true;
@@ -55,5 +70,10 @@ public class PrincipalActivity extends AppCompatActivity {
             Toast.makeText(this, "no existe...", Toast.LENGTH_SHORT).show();
             mensaje.setText("no existe...");
         }
+    }
+
+    private void llamaleer(){
+        Intent lee = new Intent(this, LeerActivity.class);
+        startActivity(lee);
     }
 }
