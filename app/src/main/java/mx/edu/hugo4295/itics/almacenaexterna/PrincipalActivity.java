@@ -77,4 +77,4 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent enviar = new Intent(this, LeerActivity.class);
         startActivity(enviar);
     }
-}
+} 
