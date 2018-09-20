@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,8 +73,8 @@ public class PrincipalActivity extends AppCompatActivity {
         }
     }
 
-    private void llamaleer(){
-        Intent lee = new Intent(this, LeerActivity.class);
-        startActivity(lee);
+    void llamaleer(View v){
+        Intent enviar = new Intent(this, LeerActivity.class);
+        startActivity(enviar);
     }
 }
